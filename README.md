@@ -1,4 +1,4 @@
-# Sound Synthesizer
+# Winsynth
 
 **Overview:** A low-level audio synthesizer written from scratch in modern C++20, using only Windows API directly for maximum control and minimum overhead. 
 
