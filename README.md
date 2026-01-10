@@ -4,7 +4,7 @@
 
 The motivation for this project was to learn more about and showcase how real-time audio synthesis works at the system level. An interface is also available, written with ImGui + Direct3D.
 
-**Design:** Built around a custom template class that manages audio buffers and threading without external dependencies. The architecture prioritizes low latency (sub-10ms) through zero-copy buffer management and minimal lock contention. 
+**Design:** Built around a custom template class (noiseMaker.h) that manages audio buffers and threading without external dependencies. The architecture prioritizes low latency through zero-copy buffer management and minimal lock contention. 
 
 ## Key Mappings
 ```
