@@ -1,4 +1,4 @@
-# Sound Synthesizer
+# Winsynth
 
 **Overview:** A low-level audio synthesizer written from scratch in modern C++20, using only Windows API directly for maximum control and minimum overhead. 
 
@@ -17,17 +17,14 @@ C4 D4 E4 F4 G4 A4 B4
 ## Quick Start
 
 ```bash
-# Clone and setup
 git clone https://github.com/shawnspitzel/winsynth.git
 cd winsynth
 git submodule add https://github.com/ocornut/imgui.git external/imgui
 
-# Build
 mkdir build && cd build
 cmake -G "Visual Studio 17 2022" -A x64 ..
 cmake --build . --config Release
 
-# Run
 .\bin\Release\winsynth.exe
 ```
 
