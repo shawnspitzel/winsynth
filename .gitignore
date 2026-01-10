@@ -78,8 +78,8 @@ Thumbs.db
 *.swo
 *~
 
-# Unnecessary
-./notes
-./Debug
-./.claude
-./x64
+# unnecessary
+/Debug 
+/x64
+notes/
+.claude/
