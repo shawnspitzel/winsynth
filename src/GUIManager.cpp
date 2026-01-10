@@ -1,6 +1,8 @@
 #include "GuiManager.h"
+
 #include "imgui_impl_dx9.h"
 #include "imgui_impl_win32.h"
+
 #include <d3d9.h>
 
 GuiManager::GuiManager(HWND hWnd, IDirect3DDevice9* device, float dpiScale)
@@ -8,15 +10,14 @@ GuiManager::GuiManager(HWND hWnd, IDirect3DDevice9* device, float dpiScale)
 {
 }
 
-GuiManager::~GuiManager()
-{
-}
+GuiManager::~GuiManager() {}
 
 bool GuiManager::Initialize()
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 
@@ -45,7 +46,9 @@ void GuiManager::Render(IDirect3DDevice9* device, ImVec4 clearColor)
     device->SetRenderState(D3DRS_ZENABLE, FALSE);
     device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
     device->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
-    D3DCOLOR clear_col_dx = D3DCOLOR_RGBA((int)(clearColor.x * clearColor.w * 255.0f), (int)(clearColor.y * clearColor.w * 255.0f), (int)(clearColor.z * clearColor.w * 255.0f), (int)(clearColor.w * 255.0f));
+    D3DCOLOR clear_col_dx = D3DCOLOR_RGBA(
+        (int)(clearColor.x * clearColor.w * 255.0f), (int)(clearColor.y * clearColor.w * 255.0f),
+        (int)(clearColor.z * clearColor.w * 255.0f), (int)(clearColor.w * 255.0f));
     device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, clear_col_dx, 1.0f, 0);
     if (device->BeginScene() >= 0)
     {

@@ -1,13 +1,10 @@
 #include "D3DManager.h"
+
 #include "imgui_impl_dx9.h"
 
-D3DManager::D3DManager(HWND hWnd) : m_hWnd(hWnd)
-{
-}
+D3DManager::D3DManager(HWND hWnd) : m_hWnd(hWnd) {}
 
-D3DManager::~D3DManager()
-{
-}
+D3DManager::~D3DManager() {}
 
 bool D3DManager::Initialize()
 {
@@ -21,7 +18,8 @@ bool D3DManager::Initialize()
     m_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
     m_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
 
-    if (m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &m_d3dpp, &m_pd3dDevice) < 0)
+    if (m_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_hWnd,
+                             D3DCREATE_HARDWARE_VERTEXPROCESSING, &m_d3dpp, &m_pd3dDevice) < 0)
         return false;
 
     return true;
@@ -29,8 +27,16 @@ bool D3DManager::Initialize()
 
 void D3DManager::Shutdown()
 {
-    if (m_pd3dDevice) { m_pd3dDevice->Release(); m_pd3dDevice = nullptr; }
-    if (m_pD3D) { m_pD3D->Release(); m_pD3D = nullptr; }
+    if (m_pd3dDevice)
+    {
+        m_pd3dDevice->Release();
+        m_pd3dDevice = nullptr;
+    }
+    if (m_pD3D)
+    {
+        m_pD3D->Release();
+        m_pD3D = nullptr;
+    }
 }
 
 void D3DManager::ResetDevice()

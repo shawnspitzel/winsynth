@@ -5,7 +5,7 @@ App* g_AppInstance = nullptr;
 int main()
 {
     App app;
-    g_AppInstance = &app; 
+    g_AppInstance = &app;
 
     if (!app.Initialize())
     {

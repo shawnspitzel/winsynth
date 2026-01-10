@@ -1,20 +1,22 @@
 #include "App.h"
-#include "GuiManager.h"
-#include "D3DManager.h"
+
 #include "AudioManager.h"
+#include "D3DManager.h"
+#include "GuiManager.h"
+
 #include <imgui_impl_win32.h>
 
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam,
+                                                             LPARAM lParam);
 
 App::App()
 {
     ImGui_ImplWin32_EnableDpiAwareness();
-    m_mainScale = ImGui_ImplWin32_GetDpiScaleForMonitor(::MonitorFromPoint(POINT{ 0, 0 }, MONITOR_DEFAULTTOPRIMARY));
+    m_mainScale = ImGui_ImplWin32_GetDpiScaleForMonitor(
+        ::MonitorFromPoint(POINT{0, 0}, MONITOR_DEFAULTTOPRIMARY));
 }
 
-App::~App()
-{
-}
+App::~App() {}
 
 bool App::Initialize()
 {
@@ -89,7 +91,7 @@ void App::Run()
             m_d3dManager->ClearResizeFlags();
         }
         m_guiManager->NewFrame();
-        if (ImGui::Begin("MIDI Controller Window", nullptr))
+        if (ImGui::Begin("Synthesizer Control", nullptr))
         {
             if (ImGui::Button("Sine Wave"))
             {
@@ -119,9 +121,22 @@ void App::Shutdown()
 
 bool App::CreateAppWindow()
 {
-    m_wc = { sizeof(m_wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, L"ImGui Example", nullptr };
+    m_wc = {sizeof(m_wc),
+            CS_CLASSDC,
+            WndProc,
+            0L,
+            0L,
+            GetModuleHandle(nullptr),
+            nullptr,
+            nullptr,
+            nullptr,
+            nullptr,
+            L"Keyboard Synthesizer",
+            nullptr};
     ::RegisterClassExW(&m_wc);
-    m_hWnd = ::CreateWindowW(m_wc.lpszClassName, L"Dear ImGui DirectX9 Example", WS_OVERLAPPEDWINDOW, 100, 100, (int)(1280 * m_mainScale), (int)(800 * m_mainScale), nullptr, nullptr, m_wc.hInstance, nullptr);
+    m_hWnd = ::CreateWindowW(m_wc.lpszClassName, L"Keyboard Sound Synthesizer", WS_OVERLAPPEDWINDOW,
+                             100, 100, (int)(1280 * m_mainScale), (int)(800 * m_mainScale), nullptr,
+                             nullptr, m_wc.hInstance, nullptr);
     return m_hWnd != nullptr;
 }
 
@@ -138,7 +153,6 @@ void App::CleanupAppWindow()
         m_wc.hInstance = nullptr;
     }
 }
-static App* g_AppInstance = nullptr;
 
 LRESULT CALLBACK App::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -164,7 +178,8 @@ LRESULT CALLBACK App::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
             {
                 if (wParam == SIZE_MINIMIZED)
                     return 0;
-                g_AppInstance->m_d3dManager->SetResizeFlags((UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
+                g_AppInstance->m_d3dManager->SetResizeFlags((UINT)LOWORD(lParam),
+                                                            (UINT)HIWORD(lParam));
                 return 0;
             }
         }

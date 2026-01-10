@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Windows.h>
-#include <memory> 
+#include <memory>
 class GuiManager;
 class D3DManager;
 class AudioManager;
@@ -29,3 +29,6 @@ private:
     bool CreateAppWindow();
     void CleanupAppWindow();
 };
+
+// Global instance pointer for window procedure callback
+extern App* g_AppInstance;

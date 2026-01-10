@@ -1,11 +1,14 @@
 #pragma once
 
 #include "noiseMaker.h"
+
+#include <atomic>
+#include <functional>
+#include <memory>
+#include <mutex>
+#include <string>
 #include <unordered_map>
 #include <vector>
-#include <string>
-#include <functional> 
-#include <memory>
 
 class AudioManager
 {
@@ -31,6 +34,7 @@ public:
 private:
     std::unique_ptr<NoiseMaker<int>> m_sound;
     std::unordered_map<WPARAM, double> m_activeNotes;
+    mutable std::mutex m_notesMutex; // Protects m_activeNotes
     WaveType m_currentWaveType = WaveType::Sine;
     static double StaticNoiseCallback(double dTime);
     double SineSoundMaker(double freq, double dTime) const;
