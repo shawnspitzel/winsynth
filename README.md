@@ -22,8 +22,8 @@ cd winsynth
 git submodule add https://github.com/ocornut/imgui.git external/imgui
 
 mkdir build && cd build
-cmake -G "Visual Studio 17 2022" -A x64 ..
-cmake --build . --config Release
+cmake -S . -B build
+cmake --build build --config Release
 
 .\bin\Release\winsynth.exe
 ```
