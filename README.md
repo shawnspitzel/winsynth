@@ -1,10 +1,10 @@
 # Winsynth
 
-**Overview:** A low-level audio synthesizer written from scratch in modern C++20, using only Windows API directly for maximum control and minimum overhead. 
+**Overview:** A low-level audio synthesizer written from scratch in modern C++20, using only Win32 calls for maximum control and minimum overhead. 
 
 The motivation for this project was to learn more about and showcase how real-time audio synthesis works at the system level. An interface is also available, written with ImGui + Direct3D.
 
-**Design:** Built around a custom template class (noiseMaker.h) that manages audio buffers and threading without external dependencies. The architecture prioritizes low latency through zero-copy buffer management and minimal lock contention. 
+**Design:** Built around a header-only audio engine that manages audio buffers and threading without external dependencies. The architecture prioritizes low latency through zero-copy buffer management and minimal lock contention. 
 
 ## Key Mappings
 ```
@@ -62,7 +62,7 @@ For detailed build instructions, see [docs/BUILD.md](docs/BUILD.md)
 ## Some things I'd like to add:
 
 - Remove ImGui dependency, using only DirectX
-- Attempt full lock-free threading
+- Lock-free threading on hot-paths
 - ADSR envelope generator
 - Improved maximum polyphony (more sophisticated algorithm)
 - Additional waveforms (saw, triangle, noise)
