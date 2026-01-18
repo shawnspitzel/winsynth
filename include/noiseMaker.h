@@ -80,6 +80,9 @@ public:
                             (DWORD_PTR)this, CALLBACK_FUNCTION) != S_OK)
                 return Destroy();
         }
+        else {
+            return false;
+        }
 
         // Allocate Wave|Block Memory
         m_pBlockMemory = new T[m_nBlockCount * m_nBlockSamples];
@@ -133,17 +136,14 @@ public:
     }
 
 public:
-    static std::vector<std::wstring>
-    GetDevices() // Use wstring to hold wide character strings for device names
-    {
-        u_int nDeviceCount =
-            waveOutGetNumDevs(); // get a list of all available audio devices on the system
+    static std::vector<std::wstring> GetDevices(){ // Use wstring to hold wide character strings for device names
+
+        u_int nDeviceCount = waveOutGetNumDevs(); // get a list of all available audio devices on the system
         std::vector<std::wstring> sDevices;
-        WAVEOUTCAPS deviceInfo;                  // Device info struct
+        WAVEOUTCAPSW deviceInfo;                  // Device info struct
         for (u_int n = 0; n < nDeviceCount; n++) // iterate through all available devices
-            if (waveOutGetDevCaps(n, &deviceInfo, sizeof(WAVEOUTCAPS)) ==
-                S_OK) // get information for each device via device ID, store within device object
-                sDevices.push_back(deviceInfo.szPname);
+            if (waveOutGetDevCapsW(n, &deviceInfo, sizeof(WAVEOUTCAPSW)) == S_OK) // get information for each device via device ID, store within device object
+                sDevices.push_back(std::wstring(deviceInfo.szPname));
         return sDevices;
     }
 
@@ -189,10 +189,10 @@ private:
         std::unique_lock<std::mutex> lm(m_muxBlockNotZero);
         m_cvBlockNotZero.notify_one();
     }
-    static void CALLBACK waveOutProcWrap(HWAVEOUT hWaveOut, UINT uMsg, DWORD dwInstance,
-                                         DWORD dwParam1, DWORD dwParam2)
+    static void CALLBACK waveOutProcWrap(HWAVEOUT hWaveOut, UINT uMsg, DWORD_PTR dwInstance,
+                                         DWORD_PTR dwParam1, DWORD_PTR dwParam2)
     {
-        ((NoiseMaker*)dwInstance)->waveOutProc(hWaveOut, uMsg, dwParam1, dwParam2);
+        ((NoiseMaker*)dwInstance)->waveOutProc(hWaveOut, uMsg, (DWORD)dwParam1, (DWORD)dwParam2);
     }
     void MainThread()
     {

@@ -1,9 +1,7 @@
 #include "AudioManager.h"
-
+#include "noiseMaker.h"
 #include <cmath>
 
-// Mathematical constants
-constexpr double PI = 3.14159265358979323846;
 constexpr double TWO_PI = 2.0 * PI;
 
 // Musical note frequencies (in Hz)
