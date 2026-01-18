@@ -21,10 +21,11 @@ git clone https://github.com/shawnspitzel/winsynth.git
 cd winsynth
 git submodule add https://github.com/ocornut/imgui.git external/imgui
 
-mkdir build && cd build
+mkdir build
 cmake -S . -B build
 cmake --build build --config Release
 
+cd build
 .\bin\Release\winsynth.exe
 ```
 
@@ -38,23 +39,6 @@ cmake --build build --config Release
 1. **DirectX SDK** - [Download here](https://www.microsoft.com/en-us/download/details.aspx?id=6812)
 2. **CMake** 3.15+ - `winget install Kitware.CMake`
 3. **ImGui** (handled by git submodule)
-
-### Build Commands
-
-**Windows (Quick)**
-```bash
-git submodule add https://github.com/ocornut/imgui.git external/imgui
-.\scripts\build.bat
-```
-
-**Windows (Manual)**
-```bash
-mkdir build && cd build
-cmake -G "Visual Studio 17 2022" -A x64 ..
-cmake --build . --config Release
-```
-
-**Output:** `build/bin/Release/winsynth.exe`
 
 For detailed build instructions, see [docs/BUILD.md](docs/BUILD.md)
 
