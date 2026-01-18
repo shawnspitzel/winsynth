@@ -45,9 +45,9 @@ For detailed build instructions, see [docs/BUILD.md](docs/BUILD.md)
 
 ## Some things I'd like to add:
 
-- Remove ImGui dependency, using only DirectX
+- Remove ImGui dependency
 - Lock-free threading on hot-paths
 - ADSR envelope generator
-- Improved maximum polyphony (more sophisticated algorithm)
+- Improved polyphony
 - Additional waveforms (saw, triangle, noise)
 
