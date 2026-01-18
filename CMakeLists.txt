@@ -53,6 +53,7 @@ if(SYNTH_PLATFORM_WINDOWS)
     set(PLATFORM_LIBS
         winmm      # Windows Multimedia API
         d3d9       # Direct3D 9
+        dwmapi     # Desktop Window Manager API (for ImGui)
     )
 
     # add DirectX include directory
@@ -62,7 +63,11 @@ if(SYNTH_PLATFORM_WINDOWS)
     else()
         message(WARNING "DirectX SDK include directory not found at: ${DIRECTX_INCLUDE_DIR}")
     endif()
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+    if(MSVC)
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+    elseif(MINGW)
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows")
+    endif()
 
 elseif(SYNTH_PLATFORM_MACOS)
     message(WARNING "macOS build requires porting from Direct3D to Metal/OpenGL and Windows MM to CoreAudio")
