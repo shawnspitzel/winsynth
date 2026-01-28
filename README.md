@@ -37,8 +37,8 @@ cd build
 ### Requirements
 
 1. **DirectX SDK** - [Download here](https://www.microsoft.com/en-us/download/details.aspx?id=6812)
-2. **CMake** 3.15+ - `winget install Kitware.CMake`
-3. **ImGui** (handled by git submodule)
+2. **CMake** 
+3. **ImGui**
 
 For detailed build instructions, see [docs/BUILD.md](docs/BUILD.md)
 
