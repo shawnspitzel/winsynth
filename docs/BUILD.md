@@ -23,7 +23,7 @@ This document provides detailed instructions for building using CMake.
 
 ImGui is required but not included in this repository. Choose one of these methods:
 
-### Method 1: Git Submodule (Recommended)
+### Method 1: Git Submodule
 ```bash
 cd sound-synthesizer
 git submodule add https://github.com/ocornut/imgui.git ImGui/ImGui
