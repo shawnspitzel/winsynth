@@ -1,6 +1,6 @@
 # Winsynth
 
-**Overview:** A low-level audio synthesizer written from scratch in modern C++20, using only Win32 calls for maximum control and minimum overhead. 
+**Overview:** A low-level audio synthesizer written from scratch in modern C++20, using only Win32 calls. 
 
 The motivation for this project was to learn more about and showcase how real-time audio synthesis works at the system level. An interface is also available, written with ImGui + Direct3D.
 
